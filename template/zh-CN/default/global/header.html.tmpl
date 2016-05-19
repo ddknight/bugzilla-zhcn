@@ -168,15 +168,15 @@
                 [%# Please keep these in alphabetical order. %]
 
                 attach_desc_required:
-                    "You must enter a Description for this attachment.",
+                    "您必须为附件添加描述信息。",
                 component_required:
-                    "You must select a Component for this [% terms.bug %].",
+                    "您必须为这个[% terms.bug %]选择一个子模块。",
                 description_required:
-                    "You must enter a Description for this [% terms.bug %].",
+                    "您必须为这个[% terms.bug %]添加描述信息。",
                 short_desc_required:
-                    "You must enter a Summary for this [% terms.bug %].",
+                    "您必须为这个[% terms.bug %]添加摘要信息。",
                 version_required:
-                    "You must select a Version for this [% terms.bug %]."
+                    "您必须为这个[% terms.bug %]选择一个版本号。"
             }
             [% IF generate_api_token %]
               , api_token: '[% get_api_token FILTER js FILTER html %]'
