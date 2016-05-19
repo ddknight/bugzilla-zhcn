@@ -7,7 +7,7 @@
   #%]
 
 [% title = BLOCK %]
-  Administer your installation (Bugzilla
+  安装管理 (Bugzilla
   [%+ constants.BUGZILLA_VERSION FILTER html %])
 [% END %]
 
@@ -17,10 +17,8 @@
 %]
 
 <div>
-  This page is only accessible to empowered users. You can access administrative pages
-  from here (based on your privileges), letting you configure different aspects of
-  this installation. Note: some sections may not be accessible to you and are marked
-  using a lighter color.
+  这个页面只允许有管理权限的用户访问. 基于权限限制，您可以在此进入管理页面，并且调整系统相关的设定。<br>
+  提示: 可能有您无法进入的页面，此部分内容将以浅色提示。
 </div>
 
 <table>
@@ -119,8 +117,8 @@
         good way to create reminders and to keep track of the activity in your installation.</dd>
 
         <dt id="release_notes">
-          <a href="page.cgi?id=release-notes.html">Release Notes</a></dt>
-        <dd>Detailed information related to this release of Bugzilla.</dd>
+          <a href="page.cgi?id=release-notes.html">版本说明</a></dt>
+        <dd>关于当前Bugzilla更多的版本说明。（英文）</dd>
 
         [% Hook.process('end_links_right') %]
       </dl>
