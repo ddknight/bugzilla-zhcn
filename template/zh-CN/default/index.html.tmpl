@@ -27,9 +27,8 @@
       <a href="[% release.data.url FILTER html %]">[% release.data.url FILTER html %]</a>下载.<br>
       版本发布日期: [% release.data.date FILTER html %]</p>
 
-      <p class="notice">This message is only shown to logged in users with admin privs.
-      You can configure this notification from the
-      <a href="editparams.cgi?section=general#upgrade_notification_desc">Parameters</a> page.</p>
+      <p class="notice">这条消息仅在有管理权限的用户登录时显示。您可以通过
+      <a href="editparams.cgi?section=general#upgrade_notification_desc">个性化</a>页面管理通知信息。</p>
     [% ELSIF release.error == "cannot_download" %]
       <p>The remote file <a href="[% constants.REMOTE_FILE FILTER html %]">
       [%~ constants.REMOTE_FILE FILTER html %]</a> cannot be downloaded
@@ -65,7 +64,7 @@
   <div class="bz_common_actions">
     <ul>
       <li>
-        <a id="enter_bug" href="enter_bug.cgi"><span>提交 [% terms.aBug %]</span></a>
+        <a id="enter_bug" href="enter_bug.cgi"><span>提交[% terms.aBug %]</span></a>
       </li>
       <li>
         <a id="query" href="query.cgi"><span>查询</span></a>
@@ -73,7 +72,7 @@
       <li>
         <a id="account"
           [% IF user.id %]
-            href="userprefs.cgi"><span>选项</span></a>
+            href="userprefs.cgi"><span>个性化</span></a>
           [% ELSIF Param('createemailregexp') && user.authorizer.user_can_create_account %]
             href="createaccount.cgi"><span>创建新账号</span></a>
           [% ELSE %]
@@ -81,17 +80,17 @@
           [% END %]
       </li>
       <li>
-        <a id="help" href="[% docs_urlbase FILTER html %]using/index.html"><span>Documentation</span></a>
+        <a id="help" href="[% docs_urlbase FILTER html %]using/index.html"><span>使用帮助</span></a>
       </li>
     </ul>
   </div>
 
   <div>
     <form id="quicksearchForm" name="quicksearchForm" action="buglist.cgi">
-      <input id="quicksearch_main" name="quicksearch" title="快速查找"
-             placeholder="请输入 [% terms.abug %] # 的编号或者内容进行快速"
+      <input id="quicksearch_main" name="quicksearch" title="快速查询"
+             placeholder="可以直接输入[% terms.abug %]#的编号或者[% terms.abug %]内容进行快速查询"
              autofocus required>
-      <input id="find" type="submit" value="Quick Search">
+      <input id="find" type="submit" value="快速查询">
       <a href="page.cgi?id=quicksearch.html" title="快速查询帮助">[?]</a>
     </form>
 
@@ -101,18 +100,18 @@
   </div>
 
   <div id="common_queries">
-    <h4>常用订阅:</h4>
+    <h4>常用内容:</h4>
     <ul>
       [% IF user.id %]
         <li>
-          [% title = BLOCK %]Open [% terms.bugs %] assigned to me[% END %]
+          [% title = BLOCK %]指派给我的[% terms.bugs %][% END %]
           <a href="buglist.cgi?f1=assigned_to&amp;o1=equals&amp;v1=%25user%25&amp;resolution=---">
             [% title FILTER html %]</a> ([% assignee_count FILTER html %])
           <a href="buglist.cgi?f1=assigned_to&amp;o1=equals&amp;v1=%25user%25&amp;resolution=---&amp;ctype=atom&amp;title=[% title FILTER uri %]"
              class="rss">&nbsp;</a>
         </li>
         <li>
-          [% title = BLOCK %]Open [% terms.bugs %] reported by me[% END %]
+          [% title = BLOCK %]回复给我的[% terms.bugs %][% END %]
           <a href="buglist.cgi?f1=reporter&amp;o1=equals&amp;v1=%25user%25&amp;resolution=---">
             [% title FILTER html %]</a> ([% reporter_count FILTER html %])
           <a href="buglist.cgi?f1=reporter&amp;o1=equals&amp;v1=%25user%25&amp;resolution=---&amp;ctype=atom&amp;title=[% title FILTER uri %]"
@@ -130,22 +129,22 @@
       [% END %]
 
       <li>
-        <a href="buglist.cgi?chfield=%5BBug%20creation%5D&amp;chfieldfrom=24h">订阅最近一天内提交的[% terms.Bugs %]</a>
+        <a href="buglist.cgi?chfield=%5BBug%20creation%5D&amp;chfieldfrom=24h">最近一天内提交的[% terms.Bugs %]</a>
         [% title = BLOCK %]订阅最近一天内提交的[% terms.Bugs %][% END %]
         <a href="buglist.cgi?chfield=%5BBug%20creation%5D&amp;chfieldfrom=24h&amp;ctype=atom&amp;title=[% title FILTER uri %]"
            class="rss">&nbsp;</a>
-        | <a href="buglist.cgi?chfield=%5BBug%20creation%5D&amp;chfieldfrom=7d">订阅最近一周内提交的[% terms.Bugs %]</a>
+        | <a href="buglist.cgi?chfield=%5BBug%20creation%5D&amp;chfieldfrom=7d">最近一周内提交的[% terms.Bugs %]</a>
         [% title = BLOCK %]订阅最近一周内提交的[% terms.Bugs %][% END %]
         <a href="buglist.cgi?chfield=%5BBug%20creation%5D&amp;chfieldfrom=7d&amp;ctype=atom&amp;title=[% title FILTER uri %]"
            class="rss">&nbsp;</a>
            
       </li>
       <li>
-        <a href="buglist.cgi?chfieldfrom=24h">订阅最近一天内变更的[% terms.Bugs %]</a>
+        <a href="buglist.cgi?chfieldfrom=24h">最近一天内变更的[% terms.Bugs %]</a>
         [% title = BLOCK %]订阅最近一天内变更的[% terms.Bugs %][% END %]
         <a href="buglist.cgi?chfieldfrom=24h&amp;ctype=atom&amp;title=[% title FILTER uri %]"
            class="rss">&nbsp;</a>
-        | <a href="buglist.cgi?chfieldfrom=7d">订阅最近一周内变更的[% terms.Bugs %]</a>
+        | <a href="buglist.cgi?chfieldfrom=7d">最近一周内变更的[% terms.Bugs %]</a>
         [% title = BLOCK %]订阅最近一周内变更的[% terms.Bugs %][% END %]
         <a href="buglist.cgi?chfieldfrom=7d&amp;ctype=atom&amp;title=[% title FILTER uri %]"
            class="rss">&nbsp;</a>
