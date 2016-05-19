@@ -11,24 +11,21 @@
   #%]
 
 [% PROCESS global/header.html.tmpl
-   title = "$terms.Bugzilla Main Page"
-   header = "Main Page" 
-   header_addl_info = "version $constants.BUGZILLA_VERSION"
+   title = "$terms.Bugzilla 主页"
+   header = "主页" 
+   header_addl_info = "版本 $constants.BUGZILLA_VERSION"
 %]
 
 [% IF release %]
   <div id="new_release">
     [% IF release.data %]
       [% IF release.deprecated %]
-        <p>Bugzilla [%+ release.deprecated FILTER html %] is no longer
-        supported. You are highly encouraged to upgrade in order to keep your
-        system secure.</p>
+        <p>不受支持的Bugzilla 版本 [%+ release.deprecated FILTER html %].为了您的安全，请升级版本.</p>
       [% END %]
 
-      <p>A new Bugzilla version ([% release.data.latest_ver FILTER html %])
-      is available at
-      <a href="[% release.data.url FILTER html %]">[% release.data.url FILTER html %]</a>.<br>
-      Release date: [% release.data.date FILTER html %]</p>
+      <p>发现新的Bugzilla 版本 ([% release.data.latest_ver FILTER html %])，可以在
+      <a href="[% release.data.url FILTER html %]">[% release.data.url FILTER html %]</a>下载.<br>
+      版本发布日期: [% release.data.date FILTER html %]</p>
 
       <p class="notice">This message is only shown to logged in users with admin privs.
       You can configure this notification from the
@@ -62,25 +59,25 @@
 [% END %]
 
 <div id="page-index">
-  <h1 id="welcome"> Welcome to [% terms.Bugzilla %]</h1>
+  <h1 id="welcome"> 欢迎来到 [% terms.Bugzilla %]</h1>
   <div class="intro">[% Hook.process('intro') %]</div>
 
   <div class="bz_common_actions">
     <ul>
       <li>
-        <a id="enter_bug" href="enter_bug.cgi"><span>File [% terms.aBug %]</span></a>
+        <a id="enter_bug" href="enter_bug.cgi"><span>提交 [% terms.aBug %]</span></a>
       </li>
       <li>
-        <a id="query" href="query.cgi"><span>Search</span></a>
+        <a id="query" href="query.cgi"><span>查询</span></a>
       </li>
       <li>
         <a id="account"
           [% IF user.id %]
-            href="userprefs.cgi"><span>User Preferences</span></a>
+            href="userprefs.cgi"><span>选项</span></a>
           [% ELSIF Param('createemailregexp') && user.authorizer.user_can_create_account %]
-            href="createaccount.cgi"><span>Open a New Account</span></a>
+            href="createaccount.cgi"><span>创建新账号</span></a>
           [% ELSE %]
-            href="?GoAheadAndLogIn=1"><span>Log In</span></a>
+            href="?GoAheadAndLogIn=1"><span>登录</span></a>
           [% END %]
       </li>
       <li>
@@ -91,11 +88,11 @@
 
   <div>
     <form id="quicksearchForm" name="quicksearchForm" action="buglist.cgi">
-      <input id="quicksearch_main" name="quicksearch" title="Quick Search"
-             placeholder="Enter [% terms.abug %] # or some search terms"
+      <input id="quicksearch_main" name="quicksearch" title="快速查找"
+             placeholder="请输入 [% terms.abug %] # 的编号或者内容进行快速"
              autofocus required>
       <input id="find" type="submit" value="Quick Search">
-      <a href="page.cgi?id=quicksearch.html" title="Quick Search help">[?]</a>
+      <a href="page.cgi?id=quicksearch.html" title="快速查询帮助">[?]</a>
     </form>
 
     <ul class="additional_links">
@@ -104,7 +101,7 @@
   </div>
 
   <div id="common_queries">
-    <h4>Common Queries:</h4>
+    <h4>常用订阅:</h4>
     <ul>
       [% IF user.id %]
         <li>
@@ -133,24 +130,23 @@
       [% END %]
 
       <li>
-        [% terms.Bugs %] reported in the
-        <a href="buglist.cgi?chfield=%5BBug%20creation%5D&amp;chfieldfrom=24h">last 24 hours</a>
-        [% title = BLOCK %][% terms.Bugs %] reported in the last 24 hours[% END %]
+        <a href="buglist.cgi?chfield=%5BBug%20creation%5D&amp;chfieldfrom=24h">订阅最近一天内提交的[% terms.Bugs %]</a>
+        [% title = BLOCK %]订阅最近一天内提交的[% terms.Bugs %][% END %]
         <a href="buglist.cgi?chfield=%5BBug%20creation%5D&amp;chfieldfrom=24h&amp;ctype=atom&amp;title=[% title FILTER uri %]"
            class="rss">&nbsp;</a>
-        | <a href="buglist.cgi?chfield=%5BBug%20creation%5D&amp;chfieldfrom=7d">last 7 days</a>
-        [% title = BLOCK %][% terms.Bugs %] reported in the last 7 days[% END %]
+        | <a href="buglist.cgi?chfield=%5BBug%20creation%5D&amp;chfieldfrom=7d">订阅最近一周内提交的[% terms.Bugs %]</a>
+        [% title = BLOCK %]订阅最近一周内提交的[% terms.Bugs %][% END %]
         <a href="buglist.cgi?chfield=%5BBug%20creation%5D&amp;chfieldfrom=7d&amp;ctype=atom&amp;title=[% title FILTER uri %]"
            class="rss">&nbsp;</a>
+           
       </li>
       <li>
-        [% terms.Bugs %] changed in the
-        <a href="buglist.cgi?chfieldfrom=24h">last 24 hours</a>
-        [% title = BLOCK %][% terms.Bugs %] changed in the last 24 hours[% END %]
+        <a href="buglist.cgi?chfieldfrom=24h">订阅最近一天内变更的[% terms.Bugs %]</a>
+        [% title = BLOCK %]订阅最近一天内变更的[% terms.Bugs %][% END %]
         <a href="buglist.cgi?chfieldfrom=24h&amp;ctype=atom&amp;title=[% title FILTER uri %]"
            class="rss">&nbsp;</a>
-        | <a href="buglist.cgi?chfieldfrom=7d">last 7 days</a>
-        [% title = BLOCK %][% terms.Bugs %] changed in the last 7 days[% END %]
+        | <a href="buglist.cgi?chfieldfrom=7d">订阅最近一周内变更的[% terms.Bugs %]</a>
+        [% title = BLOCK %]订阅最近一周内变更的[% terms.Bugs %][% END %]
         <a href="buglist.cgi?chfieldfrom=7d&amp;ctype=atom&amp;title=[% title FILTER uri %]"
            class="rss">&nbsp;</a>
       </li>
